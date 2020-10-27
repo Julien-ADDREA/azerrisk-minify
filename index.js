@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 var fs = require("fs");
 var path = require("path");
-var inputMinType = "uglifyjs";
-var compressor = require("node-minify");
+var terser = require("terser");
 
 var walk = function(currentDirPath, callback) {
     fs.readdirSync(currentDirPath).forEach(function(name) {
@@ -16,33 +15,30 @@ var walk = function(currentDirPath, callback) {
     });
 }
 
-var minifyAll = function(dir, options, callback){
+var azerriskMinify = function(dir, options, callback) {
     options = options || {};
-    options.type = options.type || inputMinType;
 
-    walk(dir, function(path, result){
-        if (path.substr(-3) === ".js" || path.substr(-4) === ".css"){
-            if (!options.silent){
-                console.log("found file: " + path);
+    walk(dir, function(filepath, result) {
+        if (filepath.substr(-3) === ".js") {
+            if (!options.silent) {
+                console.log("Processing file > " + filepath);
             }
-            new compressor.minify({
-                type: options.type, 
-                fileIn: path, 
-                fileOut: path, 
-                callback: callback || function(err, min){
-                    if(err){
-                        console.log(err);
-                    }
-                }
-            });
+
+            var data = fs.readFileSync(filepath, "utf8");
+            console.log('DADA:', data);
+
+            var minified = terser.minify(data);
+            console.log('MINIFIED:', minified);
+
+            fs.writeFileSync(filepath, minified.code, "utf8");
+            console.log(filepath, '... OK');
         }
     });
 };
 if (require.main === module) {
-    var input = process.argv, 
-        inputDir = input[2], 
-        inputMinType = input[3] || inputMinType;
-    minifyAll(inputDir);
+    var input = process.argv; 
+    var inputDir = input[2];
+    azerriskMinify(inputDir);
 } else {
-    module.exports = minifyAll;
+    module.exports = azerriskMinify;
 }

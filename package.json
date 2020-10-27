@@ -1,50 +1,34 @@
 {
-  "name": "minify-all",
-  "version": "1.2.2",
+  "name": "azerrisk-minify",
+  "version": "1.0.1",
   "description": "A tool that minifies all .js files in a folder and its nested folders",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/joeyism/node-minify-all.git"
+    "url": "git+https://github.com/Julien-ADDREA/azerrisk-minify.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "minify-all": "index.js"
+    "azerrisk-minify": "index.js"
   },
   "keywords": [
     "minify",
-    "all",
     "javascript",
-    "uglify",
-    "uglifyjs",
-    "gcc",
-    "yui",
-    "sqwish",
-    "csso",
-    "css",
+    "terser",
     "cli",
     "command",
-    "line",
-    "js",
-    "min",
-    "dist",
-    "reduce"
+    "js"
   ],
-  "author": "Joey Sham <sham.joey@gmail.com> (http://www.joeyism.com)",
+  "author": "Julien Bourgeois <jbourgeois@addrea.fr> (https://www.addrea.fr)",
   "bugs": {
-    "url": "https://github.com/joeyism/node-minify-all/issues"
+    "url": "https://github.com/Julien-ADDREA/azerrisk-minify/issues"
   },
-  "homepage": "https://github.com/joeyism/node-minify-all#readme",
+  "homepage": "https://github.com/Julien-ADDREA/azerrisk-minify#readme",
   "license": "ISC",
-  "devDependencies": {
-    "chai": "^3.0.0",
-    "istanbul": "^0.3.17",
-    "mocha": "^2.2.5"
-  },
+  "devDependencies": {},
   "dependencies": {
-    "node-minify": "^1.1.0",
-    "promise": "^7.0.3"
+    "terser": "^5.3.8"
   }
 }

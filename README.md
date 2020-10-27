@@ -1,19 +1,19 @@
-# Minify-All
+# Azerrisk-Minify
 
-A function that minifies your javascript or css files, and all the javascript or css files in your nested folders as well. **Minify-All** can be used as a CLI or can be run in your code. By giving it a directory, Minify-All will walk through the depth of your folders and minify all the javascript that it sees.
+A function that minifies your javascript files, and all the javascript files in your nested folders as well. **Azerrisk-Minify** can be used as a CLI or can be run in your code. By giving it a directory, Azerrisk-Minify will walk through the depth of your folders and minify all the javascript that it sees.
 
 ### Installation
 
-    > npm install -g minify-all 
+    > npm install -g azerrisk-minify
 
 ### Run CLI
 
-    > minify-all [folder] [compression type]
+    > azerrisk-minify [folder]
 
 ### Run in your code
-`minifyAll` function has 3 parts: directory, options, and callback, such that
+`azerriskMinify` function has 3 parts: directory, options, and callback, such that
 
-    minifyAll([directory], [options], [callback])
+    azerriskMinify([directory], [options], [callback])
 
 The callback outputs 2 options:
 * **error**: the error of each file
@@ -21,9 +21,9 @@ The callback outputs 2 options:
 
 ##### Example
 
-    var minifyAll = require("minify-all");
+    var azerriskMinify = require("azerrisk-minify");
     
-    minifyAll("./", { silent: true }, function(err){
+    azerriskMinify("./", { silent: true }, function(err){
         if(err){
             console.log(err);
         }
@@ -33,6 +33,3 @@ The callback outputs 2 options:
 
 * **silent**
 If silent mode is on, then logs of which files has been found won't be displayed
-
-* **type**
-Determines the compression type the file should be put through. As **Minify-All** depends on **node-minify**, these types are defined by **node-minify** and can be found [here](https://www.npmjs.com/package/node-minify). If a type is not specified, then by default it is *uglifyjs*
