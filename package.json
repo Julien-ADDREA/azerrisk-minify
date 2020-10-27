@@ -1,6 +1,6 @@
 {
   "name": "azerrisk-minify",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A tool that minifies all .js files in a folder and its nested folders",
   "main": "index.js",
   "repository": {
@@ -29,6 +29,7 @@
   "license": "ISC",
   "devDependencies": {},
   "dependencies": {
+    "colors": "^1.4.0",
     "terser": "^5.3.8"
   }
 }

@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 var fs = require("fs");
 var path = require("path");
-var terser = require("terser");
+var Terser = require("terser");
+var colors = require('colors');
+
+var files = [];
+var i = 0;
 
 var walk = function(currentDirPath, callback) {
     fs.readdirSync(currentDirPath).forEach(function(name) {
@@ -15,23 +19,32 @@ var walk = function(currentDirPath, callback) {
     });
 }
 
-var azerriskMinify = function(dir, options, callback) {
-    options = options || {};
+function leftPad(number, targetLength) {
+    var output = number + '';
+    while (output.length < targetLength) {
+        output = '0' + output;
+    }
+    return output;
+}
 
-    walk(dir, function(filepath, result) {
+var azerriskMinify = function(dir, callback) {
+
+    walk(dir, async function(filepath, result) {
         if (filepath.substr(-3) === ".js") {
-            if (!options.silent) {
-                console.log("Processing file > " + filepath);
-            }
+            files[path] = { path: filepath, processed: false };
 
-            var data = fs.readFileSync(filepath, "utf8");
-            console.log('DADA:', data);
+            var code = fs.readFileSync(filepath, "utf8");
 
-            var minified = terser.minify(data);
-            console.log('MINIFIED:', minified);
-
-            fs.writeFileSync(filepath, minified.code, "utf8");
-            console.log(filepath, '... OK');
+            await Terser.minify(code)
+            .then(minified => {
+                fs.writeFileSync(filepath, minified.code, "utf8");
+                i++;
+                console.log('[' + leftPad(i, 4) + '] ' + filepath + ' ... ' + 'OK'.green + ' (CONVERTED)');
+            })
+            .catch(error => {
+                i++;
+                console.log('[' + leftPad(i, 4) + '] ' + filepath + ' ... ' + 'ERROR'.red + ' (IGNORED)');
+            });
         }
     });
 };
