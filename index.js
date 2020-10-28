@@ -4,7 +4,6 @@ var path = require("path");
 var Terser = require("terser");
 var colors = require('colors');
 
-var files = [];
 var i = 0;
 
 var walk = function(currentDirPath, callback) {
@@ -27,11 +26,10 @@ function leftPad(number, targetLength) {
     return output;
 }
 
-var azerriskMinify = function(dir, callback) {
+var azerriskMinify = function(dir) {
 
     walk(dir, async function(filepath, result) {
         if (filepath.substr(-3) === ".js") {
-            files[path] = { path: filepath, processed: false };
 
             var code = fs.readFileSync(filepath, "utf8");
 

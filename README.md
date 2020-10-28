@@ -11,25 +11,12 @@ A function that minifies your javascript files, and all the javascript files in 
     > azerrisk-minify [folder]
 
 ### Run in your code
-`azerriskMinify` function has 3 parts: directory, options, and callback, such that
+`azerriskMinify` function has 1 part: directory, such that
 
-    azerriskMinify([directory], [options], [callback])
-
-The callback outputs 2 options:
-* **error**: the error of each file
-* **minified**: the output of the minified file
+    azerriskMinify([directory])
 
 ##### Example
 
     var azerriskMinify = require("azerrisk-minify");
     
-    azerriskMinify("./", { silent: true }, function(err){
-        if(err){
-            console.log(err);
-        }
-    });
-
-### Options
-
-* **silent**
-If silent mode is on, then logs of which files has been found won't be displayed
+    azerriskMinify("./");
